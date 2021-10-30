@@ -6,17 +6,57 @@
     <description>Recent content in Posts on KE8MUJ Radio Stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 29 Oct 2021 11:46:10 -0400</lastBuildDate><atom:link href="http://ke8muj.net/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Oct 2021 08:46:10 -0400</lastBuildDate><atom:link href="http://ke8muj.net/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Stratum 1 Ntp Server From WWV/H</title>
+      <title>Stratum 1 NTP Server From WWV/H or CHU</title>
       <link>http://ke8muj.net/posts/stratum-1-ntp-server-from-wwv/</link>
-      <pubDate>Fri, 29 Oct 2021 11:46:10 -0400</pubDate>
+      <pubDate>Sat, 30 Oct 2021 08:46:10 -0400</pubDate>
       
       <guid>http://ke8muj.net/posts/stratum-1-ntp-server-from-wwv/</guid>
-      <description>foo, bar baz
-foo bar baz. bar baz.</description>
-      <content>&lt;p&gt;foo, bar baz&lt;/p&gt;
-&lt;p&gt;foo bar baz. bar baz.&lt;/p&gt;
+      <description>The first time I heard a time station broadcasting the time, I thought &amp;ldquo;wouldn&amp;rsquo;t it be useful if my computer could set its clock off that?&amp;rdquo;
+So, I did some digging into it.
+ntpd, the network time protocol daemon, has several little-documented features, and it turns out using the audio signal from WWV/H or CHU is one of them, but the code is very old and written for OSS and not ALSA, let alone PulseAudio.</description>
+      <content>&lt;p&gt;The first time I heard a time station broadcasting the time, I thought &amp;ldquo;wouldn&amp;rsquo;t it be useful if my computer could set its clock off that?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;So, I did some digging into it.&lt;/p&gt;
+&lt;p&gt;ntpd, the network time protocol daemon, has several little-documented features, and it turns out using the audio signal from &lt;a href=&#34;https://en.wikipedia.org/wiki/WWV_(radio_station)&#34;&gt;WWV/H&lt;/a&gt; or &lt;a href=&#34;https://en.wikipedia.org/wiki/CHU_(radio_station)&#34;&gt;CHU&lt;/a&gt; is one of them, but the code is very old and written for OSS and not ALSA, let alone PulseAudio.&lt;/p&gt;
+&lt;p&gt;To set this up, I took my Yaesu FT-891, a SignaLink USB&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, and a Raspberry Pi 3&lt;/p&gt;
+&lt;p&gt;First tried with Rasbian Linux, and got pretty close with the alsa-oss wrappers, but in the end had no luck. Not sure why, it appeared to be working, but I just never got a clear read on a crystal-clear singal from CHU. YMMV.&lt;/p&gt;
+&lt;p&gt;Tried again with FreeBSD 13.0 on the pi, and the configuration was pretty much plug and play:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://mackmyra.static.mojocloud.com/screenshots/eeb45e5b-2392-40a7-b997-8cf8c5ca1382.png&#34; alt=&#34;screenshot showing my laptop synced with my Raspberry Pi using CHU as a source&#34;&gt;&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s my laptop syncing with my Raspberry Pi @ 192.168.18.189, left that overnight with CHU tuned on 80 meters (3.33 MHz UPPER Sideband) and I&amp;rsquo;m keeping pace with NIST&amp;rsquo;s official servers :)&lt;/p&gt;
+&lt;p&gt;Configuration is simple, and the documentation is good&amp;hellip; but you do have to &lt;a href=&#34;https://github.com/ntp-project/ntp/blob/master-no-authorname/ntpd/refclock_chu.c&#34;&gt;read the code&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;/etc/ntp.conf:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;server 127.127.7.0
+fudge 127.127.7.0 time1 0.14
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;14 milliseconds is the time delay I get from CHU. In Detroit, I&amp;rsquo;m about 418 miles from the CHU transmitters in Ottawa in a straight line, which is only about 2ms of radio delay (1ms per 300km - speed of light). My guess is ~12msec is how long it takes the audio signal to be transferred through the soundcard, and processed in the NTP drivers for CHU.&lt;/p&gt;
+&lt;p&gt;The way I got 14 milliseconds is letting another computer use my Raspberry Pi as a server, along with other known very reliable NTP servers, such as those from NIST and JRC. I picked the number 14 because it looked right, comparing it off the other offsets. Accurate enough for the servers in my basement, no rocket surgery needed :)&lt;/p&gt;
+&lt;p&gt;Doing this with WWV is just as easy, you&amp;rsquo;d want to use 127.127.36.0 instead of the third octet being 7.&lt;/p&gt;
+&lt;p&gt;127.127.7.0 = CHU&lt;/p&gt;
+&lt;p&gt;127.127.36.0 = WWV&lt;/p&gt;
+&lt;p&gt;&amp;hellip;It&amp;rsquo;s just how ntp.conf works, don&amp;rsquo;t ask me why. The 1990s were a wild time, I guess.&lt;/p&gt;
+&lt;p&gt;If you have multiple sound cards (FreeBSD didn&amp;rsquo;t automatically detect/load the module for the onboard Pi sound card), you&amp;rsquo;d want to set up a /etc/ntp.audio file, something like this, to use the second sound card:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;idev /dev/dsp2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Both audio drivers (CHU and WWV/H) also support tuning an ICOM radio via the serial port, to switch around to other known signals for CHU or WWV/H if it loses signal on one band. According to the code, the baud rate is set to 9600. I tried symlinking my radio&amp;rsquo;s USB COM port for CAT control to /dev/icom, which looks like it should work&amp;hellip; but when running the program, I don&amp;rsquo;t even see any attempts to access /dev/icom, using strace or truss. Using FreeBSD&amp;rsquo;s ports system to recompile it, there&amp;rsquo;s no option to &amp;ldquo;&amp;ndash;enable-icom&amp;rdquo;, and icom support appears to be hard-enabled from first glance at the code. More digging will be needed here.&lt;/p&gt;
+&lt;p&gt;Definitely going to poke at this more in any event&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;More on this story as it develops&lt;/p&gt;
+&lt;p&gt;Further reading:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ntp-project/ntp/blob/master-no-authorname/ntpd/refclock_chu.c&#34;&gt;refclock_chu.c&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ntp-project/ntp/blob/master-no-authorname/ntpd/refclock_wwv.c&#34;&gt;refclock_wwv.c&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;though likely, any modern cheap $10 USB soundcard would work, or probably even the onboard line-in on a normal computer&amp;rsquo;s motherboard&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Fun project ideas, maybe in the future when I get some time: port these drivers to work with an RTL-SDR in direct sampled mode. Then a $20 Raspberry Pi, a $20 RTL-SDR, and a low noise, recieve only Loop-on-Ground antenna could give you a pretty reliable and cheap stratum-1 reference clock. For now this is just a fun toy as I&amp;rsquo;m not going to tie up an expensive HF radio 24x7x365, just to know what time it is, but something like an RTL-SDR would bring this into the realm of practicality.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
 </content>
     </item>
     
