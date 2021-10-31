@@ -12,7 +12,7 @@ ntpd, the network time protocol daemon, has several little-documented features, 
 
 To set this up, I took my Yaesu FT-891, a SignaLink USB[^1], and a Raspberry Pi 3
 
-First tried with Rasbian Linux, and got pretty close with the alsa-oss wrappers, but in the end had no luck. Not sure why, it appeared to be working, but I just never got a clear read on a crystal-clear singal from CHU. YMMV.
+First tried with Rasbian Linux, and got pretty close with the alsa-oss wrappers, but in the end had no luck. Not sure why, it appeared to be working, but I just never got a clear read on a crystal-clear signal from CHU. YMMV.
 
 Tried again with FreeBSD 13.0 on the pi, and the configuration was pretty much plug and play:
 
@@ -50,7 +50,23 @@ Both audio drivers (CHU and WWV/H) also support tuning an ICOM radio via the ser
 
 Definitely going to poke at this more in any event[^2]
 
-More on this story as it develops 
+More on this story as it develops...
+
+*Update: 2021-03-31*
+
+I've been playing with this all weekend and from my location, cannot get a good sync on WWV, despite fairly good propagation conditions for a solar minimum. 
+
+CHU works no problem, I can get it on at least one frequency anytime, day or night, in minutes. CHU rock, WWV suck.
+
+Part of this is no doubt that Detroit is closer to Ottawa than Colorado, but I also think that part of this is that the Canadians simply did things a bit more intelligently, here. 
+
+3.33 MHz, 14.67 MHz, and 7.85 MHz Upper Sideband (USB) all fall fairly close to the 80, 20, and 40 meter amateur bands, respectively, which ham antennas tend to be tuned for, and I happen to have little interference on any of those frequencies. They also use simple FSK modem noises, easily hearable by humans (think 1990s dial-up modem noise), and easily decodable by my computer.
+
+By comparison, the much wider bandwidth AM signal from WWV falls at 2.5, 5, 10, 15, 20, and 25 MHz, most of which I have a ton of noise on most of the day and night, and uses a human-inaudible 100MHz subcarrier that, quite honestly, I'm not sure if I'm picking up or not, as Wikipedia assures me I can't hear it
+
+Disabling the AGC on my radio did get me some _partial_ reads at a particularily clear time of day, on 15 MHz. But I can tune up CHU and get a sync anytime, effortlessly. Just sayin'
+
+WWVB, on the other hand, I do tend to get a pretty clear read on. But as far as I know, there's no WWVB audio decoder for ntpd, just serial from a WWVB modem.
 
 Further reading:
 
@@ -60,4 +76,3 @@ Further reading:
 
 [^1]: though likely, any modern cheap $10 USB soundcard would work, or probably even the onboard line-in on a normal computer's motherboard
 [^2]: Fun project ideas, maybe in the future when I get some time: port these drivers to work with an RTL-SDR in direct sampled mode. Then a $20 Raspberry Pi, a $20 RTL-SDR, and a low noise, recieve only Loop-on-Ground antenna could give you a pretty reliable and cheap stratum-1 reference clock. For now this is just a fun toy as I'm not going to tie up an expensive HF radio 24x7x365, just to know what time it is, but something like an RTL-SDR would bring this into the realm of practicality.
-
