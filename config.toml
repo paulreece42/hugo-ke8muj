@@ -71,4 +71,4 @@ theme = "terminal"
       [[languages.en.menu.main]]
         identifier = "sstv"
         name = "SSTV Cam"
-        url = "/sstv"
+        url = "/sstv/0/"
