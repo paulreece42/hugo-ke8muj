@@ -8,6 +8,9 @@ On Halloween, I had a blast listening to pirate radio stations, mostly Radio Gen
 
 One of the neat things was they had intermittent SSTV mixed in with their music, and I recieved many cool Halloween-themed pictures. Pumkins, ghosts, and so on. The ones from Outhouse Radio were just really cool pictures, hard to describe.
 
+Luckily, [I recorded it!](/posts/halloween-pirates/)
+
+
 All was well, until one day last week I left MMSSTV running with my radio tuned to 14.230 and went to work. I came back from work to look at what I'd captured, propagation was very good that day, and...
 
 OH, NO.
@@ -26,20 +29,20 @@ Anyways, what that little API does, is lets you POST images using curl (or some 
 
 You can also query the API with a GET, and get a json listing of uploaded SSTV images
 
-Then I just wrote a simple little python/jinja2 wrapper, to query this API when I build Hugo, and give me some SSTV blog posts: [https://github.com/paulreece42/hugo-ke8muj/blob/main/json2md.py](https://github.com/paulreece42/hugo-ke8muj/blob/main/json2md.py)
+Then I just wrote a simple little [python/jinja2 wrapper](https://github.com/paulreece42/hugo-ke8muj/blob/main/json2md.py), to query this API when I build Hugo, and give me some SSTV blog posts
 
 Hugo then builds all of this into a static-HTML website, which can then be uploaded either to a traditional webserver, or object storage using the s3website API. Using object storage and running a Hugo build pipeline and the SSTV uploader container in k8s (or AWS lambda, or whatever), you end up with a "serverless" solution.
 
-Finally, I use a PowerShell script to monitor MMSSTV's History folder for changes, and POST the changed .bmp file to my API
+Finally, I use a [PowerShell script](https://github.com/paulreece42/sstv-uploader/blob/main/monitor_mmsstv.ps1) to monitor MMSSTV's History folder for changes, and POST the changed .bmp file to my API
 
 I really wanted to integrate this with some ML image recognition technologies like AWS Rekognition, at least to try to pull call signs off of recieved images, but the static just absolutely destroys the ability of ML to recognize and categorize images, and SSTV certainly isn't a popular enough hobby to train my own datasets. Digital/PAL-SSTV shows a lot more promise for that, but in days of occasional listening on 14.233, I haven't heard a single Digital/PAL-SSTV broadcast yet. Though to be fair, I have a very noisy QTH - I live in the middle of a major city
 
-In the near-future, I want to get QSSTV running on a Raspberry Pi, drawing from a RTL-SDR, and ideally I'll also add the frequency the SSTV was recieved to the data I upload and display. 
+In the near-future, I want to get QSSTV running on a Raspberry Pi, drawing from a RTL-SDR[^3], and ideally I'll also add the frequency the SSTV was recieved to the data I upload and display. 
 
 
-I say RasPi+RTL-SDR a lot. I imagine my ham shack in a few years just growing to be a veritable server rack of dozens of RasPis with RTL-SDR dongles :) 
 
 
 
 [^1]: Actually, I think the language for this is Rust, these days. Golang was like 5 years ago, but people are still using it fairly often, so I finally took notice as it's survived the test of time.
 [^2]: If you did get here from Google, you're probably asking "okay then, what _is_ the way!?" Honestly, I have no idea. I didn't even look into it, I just saw the oppourtunity to make something pointlessly complex and jumped at it, sorry... probably "something with FTP" is my guess of what most people use?
+[^3]: I say "RasPi + RTL-SDR" a lot. I imagine my ham shack in a few years just growing to be a veritable server rack of dozens of RasPis with RTL-SDR dongles :) 
