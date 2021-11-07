@@ -11,9 +11,7 @@ date: {{now}}
 draft: false
 ---
 
-20m Dipole @ 20 feet EN82kk, Detroit MI USA
-
-~Raspberry Pi running QSSTV, RTL-SDR, 14.230 MHz~
+MFJ-2012 @ 50 feet EN82kk, Detroit MI USA
 
 Ancient Windows 7 laptop running MMSSTV, 14.230 MHz
 
