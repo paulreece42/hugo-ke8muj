@@ -46,8 +46,8 @@ theme = "terminal"
 [languages]
   [languages.en]
     languageName = "English"
-    title = "KE8MUJ Radio Stuff"
-    subtitle = "Doing stuff and things, and sometimes, things and stuff"
+    title = "KE8MUJ Radio Art"
+    subtitle = "Art consisting of 1500 watts blasted at the atmosphere."
     owner = ""
     keywords = ""
     copyright = ""
