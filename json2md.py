@@ -24,15 +24,15 @@ These images are uploaded automatically by people around the world, and may cont
 
 | SSTV | CAMS |
 |------|------|
-| ![{{foo[0]['link']}}]({{foo[0]['link']}}) | ![{{foo[1]['link']}}]({{foo[1]['link']}}) |
+| {{foo[0]['sc']}} | {{foo[1]['sc']}} |
 | {{foo[0]['uploadtime']}} | {{foo[1]['uploadtime']}} |
-| ![{{foo[2]['link']}}]({{foo[2]['link']}}) | ![{{foo[3]['link']}}]({{foo[3]['link']}}) |
+| {{foo[2]['sc']}} | {{foo[3]['sc']}} |
 | {{foo[2]['uploadtime']}} | {{foo[3]['uploadtime']}} |
-| ![{{foo[4]['link']}}]({{foo[4]['link']}}) | ![{{foo[5]['link']}}]({{foo[5]['link']}}) |
+| {{foo[4]['sc']}} | {{foo[5]['sc']}} |
 | {{foo[4]['uploadtime']}} | {{foo[5]['uploadtime']}} |
-| ![{{foo[6]['link']}}]({{foo[6]['link']}}) | ![{{foo[7]['link']}}]({{foo[7]['link']}}) |
+| {{foo[6]['sc']}} | {{foo[7]['sc']}} |
 | {{foo[6]['uploadtime']}} | {{foo[7]['uploadtime']}} |
-| ![{{foo[8]['link']}}]({{foo[6]['link']}}) | ![{{foo[7]['link']}}]({{foo[9]['link']}}) |
+| {{foo[8]['sc']}} | {{foo[9]['sc']}} |
 | {{foo[8]['uploadtime']}} | {{foo[9]['uploadtime']}} |
 
 Page: [0](http://ke8muj.net/sstv/0/) [1](http://ke8muj.net/sstv/1/) [2](http://ke8muj.net/sstv/2/) [3](http://ke8muj.net/sstv/3/) [4](http://ke8muj.net/sstv/4/) [5](http://ke8muj.net/sstv/5/) [6](http://ke8muj.net/sstv/6/) [7](http://ke8muj.net/sstv/7/) [8](http://ke8muj.net/sstv/8/) [9](http://ke8muj.net/sstv/9/)
@@ -52,6 +52,10 @@ except:
 foo = r.json()
 
 now = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S-00:00')
+
+
+for idx, x in enumerate(foo['data']):
+    foo['data'][idx]['sc'] = """{{<image src="%s">}}""" % x['link']
 
 try:
     print(t.render(foo=foo['data'], now=now))
