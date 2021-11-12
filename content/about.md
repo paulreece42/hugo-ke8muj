@@ -1,11 +1,13 @@
 ---
 title: "About"
-date: 2021-10-30T11:54:14-04:00
+date: 2021-11-07T18:56:14-04:00
 draft: false
 ---
 
-Hi, I'm Paul! (yes, [I'm aware](https://www.youtube.com/watch?v=jKudhp317bM))
+I'm Paul
 
-Amateur radio callsign [KE8MUJ](https://www.qrz.com/db/KE8MUJ). 
+I exist places. 
 
-Sometimes I do stuff and things. Sometimes they end up here.
+- [https://qrz.com/db/ke8muj](https://qrz.com/db/ke8muj)
+- [https://www.paulreece.com](https://www.paulreece.com)
+

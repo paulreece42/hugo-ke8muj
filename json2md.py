@@ -5,6 +5,10 @@ import jinja2
 import datetime
 import sys
 
+import os
+
+BEARER = os.getenv('BEARER_TOKEN')
+
 t = jinja2.Template("""---
 title: "SSTV Cam"
 date: {{now}}
@@ -41,9 +45,9 @@ Page: [0](http://ke8muj.net/sstv/0/) [1](http://ke8muj.net/sstv/1/) [2](http://k
 
 try:
     page = sys.argv[1]
-    r = requests.get('http://hackdetroit.city:14230/sstv/%s' % page, headers={'Bearer' : 'foobarbaz' })
+    r = requests.get('http://hackdetroit.city:14230/sstv/%s' % page, headers={'Bearer' : BEARER })
 except:
-    r = requests.get('http://hackdetroit.city:14230/sstv/0', headers={'Bearer' : 'foobarbaz' })
+    r = requests.get('http://hackdetroit.city:14230/sstv/0', headers={'Bearer' : BEARER })
 
 foo = r.json()
 
