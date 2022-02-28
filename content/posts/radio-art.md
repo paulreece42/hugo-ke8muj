@@ -29,3 +29,7 @@ https://soundcloud.com/svthr
 Lately I've been listening to VORW International, the radio show put out by YouTuber TheReportOfTheWeek / ReviewBrah, on 7850 KHz / 7.85 MHz, Thursday-Sunday at 9pm Eastern, I've been really enjoying his sensible, reasonable takes on the news.
 
 I've also noticed that, outside of the 80 meter ham band at night, amateur radio tends to be almost the opposite of the sort of angst you all too often encounter, on the internet. The vast majority of hams, and I really do mean upwards of 90% here, are very nice and easy to talk to, tend to keep topics upbeat and light-hearted. As someone whose day job involves the internet, I find this very refreshing.
+
+Last but not least, I just can't stop listening to Arctic Outpost Radio, AM1270, a small radio station from the arctic island of Longyearbyen, Norway. I keep trying to pick up their AM signal on far-northern WebSDRs, but so far none are far-north enough! No worries, until then we always have the TuneIn radio link
+
+https://www.aor.am/
