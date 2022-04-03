@@ -21,7 +21,7 @@ I'm working on several projects right now that are going to take some time, but 
 
 I listen to the HRCC Podcast and Nathan from Southern Vermont Ham Radio does some really fun song covers, and turns the lyrics into being all about amateur radio and I absolutely love it!!! More "radio art"!
 
-https://soundcloud.com/svthr 
+[https://soundcloud.com/svthr](https://soundcloud.com/svthr)
 
 ("A Whole New Rig" is my favorite! :) )
 
@@ -32,4 +32,6 @@ I've also noticed that, outside of the 80 meter ham band at night, amateur radio
 
 Last but not least, I just can't stop listening to Arctic Outpost Radio, AM1270, a small radio station from the arctic island of Longyearbyen, Norway. I keep trying to pick up their AM signal on far-northern WebSDRs, but so far none are far-north enough! No worries, until then we always have the TuneIn radio link
 
-https://www.aor.am/
+[https://www.aor.am/](https://www.aor.am/)
+
+And on that bombshell, it's time to end. Thank you so much for reading, and on behalf of myself and the whole gang here at [Possum Hollow](https://possum-hollow.com)... keep your stick on the ice!
