@@ -15,7 +15,7 @@ Anyways, it wasn't long after listening to ReviewBrah / [Report of the Week](htt
 
 More recently, I caught the last broadcast of Voice of Greece, which had some absolutely amazing music, and even Radio New Zealand
 
-I was having a blast, but then work went from nightmare mode to something beyond, that we don't even have words for, and I quickly found myself working upwards of 60 horus a week. I love my job and I'm not here to complain, but I have my ham shack in the basement, surrounded by concrete and extremely well-grounded, because I'm terrified of lightning strikes on or near my hundred-foot long antenna starting fires. Yet my office is in a very Zoom-call-worthy room of my house, the library. So, I wanted to be at my desk working as much as possible, but that takes me away from my radios. You see the dilemma. A man should not be deprived his radios. 
+I was having a blast, but then work went from nightmare mode to something beyond, that we don't even have words for, and I quickly found myself working upwards of 60 hours a week. I love my job and I'm not here to complain, but I have my ham shack in the basement, surrounded by concrete and extremely well-grounded, because I'm terrified of lightning strikes on or near my hundred-foot long antenna starting fires. Yet my office is in a very Zoom-call-worthy room of my house, the library. So, I wanted to be at my desk working as much as possible, but that takes me away from my radios. You see the dilemma. A man should not be deprived his radios. 
 
 Anyways, now that you've heard my entire life story, time for:
 
