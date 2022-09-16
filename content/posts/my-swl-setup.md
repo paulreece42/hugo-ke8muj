@@ -1,7 +1,7 @@
 ---
 title: "My SWL Setup"
 date: 2022-03-26T23:50:10-05:00
-draft: false
+draft: true
 ---
 
 
